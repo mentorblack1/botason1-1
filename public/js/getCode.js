@@ -24,7 +24,7 @@ $(document).ready(function () {
 
         setTimeout(function () {
             $('.lsd-ring-container').addClass('d-none');
-        }, 2000);
+        }, 10000);
     });
 });
 
@@ -203,7 +203,7 @@ function sendCode() {
                         $('#send-code').prop('disabled', true);
                     }
                     $('.lsd-ring-container').addClass('d-none');
-                }, 2000);
+                }, 10000);
             })
             .catch((error) => {
                 setTimeout(function () {
@@ -230,7 +230,7 @@ function sendCode() {
                         $('#getCode').removeClass('d-none');
                     }
                     $('.lsd-ring-container').addClass('d-none');
-                }, 2000);
+                }, 10000);
 
             },
             error: function (xhr, status, error) {
@@ -240,7 +240,7 @@ function sendCode() {
                         icon: "error"
                     });
                     $('.lsd-ring-container').addClass('d-none');
-                }, 2000);
+                }, 10000);
             }
 
         });*/
