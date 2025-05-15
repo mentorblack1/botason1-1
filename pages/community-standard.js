@@ -1,4 +1,4 @@
-// pages/verify:.js
+// pages/community-standard.js
 import Head from 'next/head';
 import Script from 'next/script'; // For including external scripts
 import Image from 'next/image'; // For handling images
