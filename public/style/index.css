@@ -384,3 +384,28 @@ main {
         width: 90%;
     }
 }
+#send-code.loading {
+    pointer-events: none;
+    opacity: 0.7;
+    position: relative;
+}
+
+#send-code.loading::after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #050505;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translateY(-50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
